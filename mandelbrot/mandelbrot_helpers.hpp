@@ -1,5 +1,6 @@
 #include <vector>
 #include <complex>
+#include <fstream>
 
 
 struct Image {
@@ -37,6 +38,25 @@ int mandelbrot_pixel_color(std::complex<double> c, int color)
     }
 
     return color;
+}
+
+
+void save_ppm_image(Image& image, std::string filename) {
+    std::ofstream ofs(filename, std::ofstream::out);
+
+    // write file header
+    ofs << "P3" << std::endl;
+    ofs << image.width << " " << image.height << std::endl;
+    ofs << 255 << std::endl;
+
+    // write all pixels colors
+    for (int j = 0; j < image.height; j++) {
+        for (int i = 0; i < image.width; i++) {
+            ofs << " " << image(0, j, i) << " " << image(1, j, i) << " " << image(2, j, i) << std::endl;
+        }
+    }
+
+    ofs.close();
 }
 
 

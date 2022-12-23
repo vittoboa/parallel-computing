@@ -102,5 +102,8 @@ int main(int argc, char **argv)
         t.join();
     }
 
+    // save image
+    save_ppm_image(image, "mandelbrot.ppm");
+
     return 0;
 }
