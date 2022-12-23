@@ -37,6 +37,8 @@ int main(int argc, char **argv)
     // init variables with default values
     int num_threads = std::thread::hardware_concurrency();
     std::string work_allocation = "static";
+    // possibly update default values with the user provided values
+    parse_args(argc, argv, num_threads, work_allocation);
 
     // define the image to plot the mandelbrot set
     int channels = 3; // red, green, blue

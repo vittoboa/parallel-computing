@@ -38,3 +38,17 @@ int mandelbrot_pixel_color(std::complex<double> c, int color)
 
     return color;
 }
+
+
+void parse_args(int argc, char **argv, int& num_threads, std::string& work_allocation) {
+    // parse arguments
+    for (int i = 1; i < argc; i++) {
+        if (std::string(argv[i]) == "--num-threads") {
+            // set the number of threads if specified
+            num_threads = std::stoi(argv[++i]);
+        } else if (std::string(argv[i]) == "--work-allocation") {
+            // set the type of work allocation if specified
+            work_allocation = argv[++i];
+        }
+    }
+}
