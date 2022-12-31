@@ -124,6 +124,21 @@ int main(int argc, char **argv)
 
     } while (epsilon <= diffnorm && iteration_count < max_iterations);
 
+    // collect all local parts of the U matrix, and save it to the larger matrix
+    int recvcounts[nprocs];
+    int displacements[nprocs];
+    if (rank == 0) {
+        int displ = 0;
+        for (int i = 0; i < nprocs; i++) {
+            int n_rows = (rows_tot / nprocs) + ((rows_tot % nprocs > i) ? 1 : 0);
+            recvcounts[i] = n_rows * cols_tot;
+            displacements[i] = displ;
+            displ += recvcounts[i];
+        }
+    }
+    Mat U_entire(rows_tot, cols_tot);
+    MPI_Gatherv(&U(1, 0), cols_tot * (rows_proc - 2), MPI_DOUBLE, &U_entire(0, 0), recvcounts, displacements, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
     // end MPI
     MPI_Finalize();
 
