@@ -1,7 +1,7 @@
 #include <mpi.h>
 #include <cmath>
 
-#include "heat_equation_parallel.hpp"
+#include "heat_equation_helpers.hpp"
 
 
 int main(int argc, char **argv)
