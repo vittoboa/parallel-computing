@@ -12,6 +12,9 @@ int main(int argc, char **argv)
     double epsilon = 1.0e-3;
     int max_iterations = 15000;
 
+    // set the values based on the command line arguments
+    process_args(argc, argv, cols_tot, rows_tot, max_iterations, epsilon);
+
     // init MPI
     MPI_Init(&argc, &argv);
 
