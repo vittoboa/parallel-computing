@@ -142,6 +142,11 @@ int main(int argc, char **argv)
     Mat U_entire(rows_tot, cols_tot);
     MPI_Gatherv(&U(1, 0), cols_tot * (rows_proc - 2), MPI_DOUBLE, &U_entire(0, 0), recvcounts, displacements, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
+    // save matrix in a file
+    if (rank == 0) {
+        save_matrix(U_entire, "matrix_heat_equation.txt");
+    }
+
     // end MPI
     MPI_Finalize();
 

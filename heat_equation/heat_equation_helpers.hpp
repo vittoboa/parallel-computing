@@ -1,4 +1,7 @@
 #include <vector>
+#include <iomanip>
+#include <fstream>
+#include <iostream>
 
 
 struct Mat {
@@ -45,4 +48,18 @@ void process_args(int argc, char **argv, int& cols, int& rows, int& max_iteratio
         std::cout << "Usage: --cols <int> --rows <int> [--max-iterations <int> --epsilon <double>]" << std::endl;
         exit(-1);
     }
+}
+
+
+void save_matrix(Mat& U, std::string filename) {
+    std::ofstream ofs(filename, std::ofstream::out);
+    ofs << U.width << "\n" << U.height << "\n";
+
+    for (int i = 0; i < U.height; ++i) {
+        for (int j = 0; j < U.width; ++j) {
+            ofs << std::fixed << std::setfill(' ') << std::right << std::setw(11) << std::setprecision(6) <<  U(i,j) << " ";
+        }
+    }
+
+    ofs.close();
 }
