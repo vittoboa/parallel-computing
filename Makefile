@@ -1,11 +1,11 @@
-all: mbrot.x heat.x
+all: mbrot heat
 
-mbrot.x:
-	g++ mandelbrot/mandelbrot_parallel.cpp -O2 -std=c++20 -lpthread -o mbrot.x
+mbrot:
+	g++ mandelbrot/mandelbrot_parallel.cpp -O2 -std=c++20 -lpthread -o mbrot
 
-heat.x:
-	mpic++ heat_equation/heat_equation_parallel.cpp -O2 -lm -o heat.x
+heat:
+	mpic++ heat_equation/heat_equation_parallel.cpp -O2 -lm -o heat
 
 clean:
-	rm mbrot.x
-	rm heat.x
+	rm mbrot
+	rm heat
